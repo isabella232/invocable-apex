@@ -1,13 +1,13 @@
-public with sharing class QuerySuggest {
+public with sharing class CoveoQuerySuggest {
 
     private static final String PATH = 'querySuggest';
 
     public static String getPath() {
-        return QuerySuggest.PATH;
+        return CoveoQuerySuggest.PATH;
     }
 
     public class Response {
-        public List<QuerySuggest.Result> completions;
+        public List<CoveoQuerySuggest.Result> completions;
     }
 
     public class Result {
