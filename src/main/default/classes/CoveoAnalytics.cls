@@ -38,7 +38,7 @@ public with sharing class CoveoAnalytics {
     }
 
     public class SearchEvent extends Event {
-        public SearchEvent fromQueryResponse(CoveoSearch.Response queryResponse) {
+        public SearchEvent fromQueryResponse(CoveoSearchAPI.Response queryResponse) {
             if(queryResponse != null) {
                 this
                     .withParam('numberOfResults', queryResponse.totalCount)

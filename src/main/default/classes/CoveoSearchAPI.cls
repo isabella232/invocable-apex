@@ -1,8 +1,8 @@
-public with sharing class CoveoSearch {
+public with sharing class CoveoSearchAPI {
     private static final String PATH = '';
 
     public static String getPath() {
-        return CoveoSearch.PATH;
+        return CoveoSearchAPI.PATH;
     }
 
     public class Response {
@@ -39,6 +39,29 @@ public with sharing class CoveoSearch {
                     rank++;
                 }
             }
+        }
+    }
+
+    public class Request {
+        public String q;
+        public String aq;
+        public String cq;
+        public String lq;
+        public Map<String,Object> params;
+        public Map<String,Object> context;
+
+        public Request() {
+            this.params = new Map<String,Object>();
+            this.context = new Map<String,Object>();
+        }
+
+        public build() {
+            if(this.params == null) this.params = new Map<String,Object>();
+            if(this.q != null) this.params.put('q', this.q);
+            if(this.aq != null) this.params.put('aq', this.aq);
+            if(this.cq != null) this.params.put('cq', this.cq);
+            if(this.lq != null) this.params.put('lq', this.lq);
+            if(this.context != null) this.params.put('context', context);
         }
     }
 }

@@ -1,12 +1,12 @@
 public with sharing class QueryController {
 
-    public static QuerySuggest.Response executeQuerySuggest(String query, String language, Map<String,Object> additionalParams, String token) {
+    public static QuerySuggest.Response executeQuerySuggest(QuerySuggest.Request requestParams, String token) {
         try {
             // Add the query to the additional raw params.
-            additionalParams.put('q', query);
-            additionalParams.put('language', language);
+            additionalParams.put('q', requestParams.partialQuery);
+            additionalParams.put('language', requestParams.language);
 
-            HttpResponse querySuggestHttpResponse = CoveoRestRequest.callSearchPost(QuerySuggest.getPath(), token, additionalParams);
+            HttpResponse querySuggestHttpResponse = CoveoRestRequest.callSearchPost(QuerySuggest.getPath(), token, requestParams.additionalParams);
 
             if(querySuggestHttpResponse.getStatusCode() == 200) { // Everything worked correctly.
                 QuerySuggest.Response response = (QuerySuggest.Response) JSON.deserialize(querySuggestHttpResponse.getBody(), QuerySuggest.Response.class);
@@ -20,19 +20,16 @@ public with sharing class QueryController {
         }
     }
 
-    public static CoveoSearch.Response executeQuery(String query, Map<String,Object> additionalParams, String token, Map<String,Object> context) {
+    public static CoveoSearchAPI.Response executeQuery(CoveoSearchAPI.Request mySearchRequest, String token) {
+        if(mySearchRequest == null) return null;
         try {
-            // Add the query to the additional raw params.
-            additionalParams.put('q', query);
             // Add user context.
-            if(context != null) {
-                additionalParams.put('context', context);
-            }
+            mySearchRequest.build();
 
-            HttpResponse coveoSearchHttpResponse = CoveoRestRequest.callSearchPost(CoveoSearch.getPath(), token, additionalParams);
+            HttpResponse coveoSearchHttpResponse = CoveoRestRequest.callSearchPost(CoveoSearchAPI.getPath(), token, mySearchRequest.params);
 
             if(coveoSearchHttpResponse.getStatusCode() == 200) { // Everything worked correctly.
-                CoveoSearch.Response response = new CoveoSearch.Response((Map<String,Object>) JSON.deserializeUntyped(coveoSearchHttpResponse.getBody()));
+                CoveoSearchAPI.Response response = new CoveoSearchAPI.Response((Map<String,Object>) JSON.deserializeUntyped(coveoSearchHttpResponse.getBody()));
                 return response;
             } else {
                 return null;

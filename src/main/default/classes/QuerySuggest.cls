@@ -7,12 +7,28 @@ public with sharing class QuerySuggest {
     }
 
     public class Response {
-        public List<QuerySuggestResult> completions;
+        public List<QuerySuggest.Result> completions;
     }
 
-    public class QuerySuggestResult {
+    public class Result {
         public String expression;
         public Double score;
         public Double executableConfidence;
+    }
+
+    public class Request {
+        public String partialQuery;
+        public String language;
+        Map<String,Object> additionalParams;
+
+        public Request(String partialQuery, String language, Map<String,Object> additionalParams) {
+            this.partialQuery = partialQuery;
+            this.language = language;
+            if(additionalParams == null) {
+                this.additionalParams = new Map<String,Object>();
+            } else {
+               this.additionalParams = additionalParams;
+            }
+        }
     }
 }
