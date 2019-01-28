@@ -1,12 +1,12 @@
 public with sharing class CoveoQueryController {
 
-    public static CoveoQuerySuggest.Response executeQuerySuggest(CoveoQuerySuggest.Request requestParams, String token) {
+    public static CoveoQuerySuggest.Response executeQuerySuggest(CoveoQuerySuggest.Request qsRequest, String token) {
         try {
-            // Add the query to the additional raw params.
-            additionalParams.put('q', requestParams.partialQuery);
-            additionalParams.put('language', requestParams.language);
-
-            HttpResponse querySuggestHttpResponse = CoveoRestRequest.callSearchPost(CoveoQuerySuggest.getPath(), token, requestParams.additionalParams);
+            HttpResponse querySuggestHttpResponse = CoveoRestRequest.callSearchPost(
+                CoveoQuerySuggest.getPath(), 
+                token, 
+                qsRequest.build()
+            );
 
             if(querySuggestHttpResponse.getStatusCode() == 200) { // Everything worked correctly.
                 CoveoQuerySuggest.Response response = (CoveoQuerySuggest.Response) JSON.deserialize(querySuggestHttpResponse.getBody(), CoveoQuerySuggest.Response.class);

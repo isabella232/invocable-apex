@@ -30,5 +30,18 @@ public with sharing class CoveoQuerySuggest {
                this.additionalParams = additionalParams;
             }
         }
+
+        public Map<String,Object> build() {
+            if(this.additionalParams == null) {
+                this.additionalParams = new Map<String,Object>();
+            }
+            if(this.partialQuery != null) {
+                this.additionalParams.put('q', this.partialQuery);
+            }
+            if(this.language != null) {
+                this.additionalParams.put('language', this.language);
+            }
+            return this.additionalParams;
+        }
     }
 }
