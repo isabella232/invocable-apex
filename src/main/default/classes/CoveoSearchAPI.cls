@@ -11,7 +11,7 @@ public with sharing class CoveoSearchAPI {
         public String searchUid;
         public String pipeline;
         public List<Object> rawResults;
-        public List<CoveoResult> searchResults;
+        public List<CoveoResult> results;
         public Integer totalCount;
 
         public Response(){}
@@ -28,13 +28,13 @@ public with sharing class CoveoSearchAPI {
 
         public void deserializeResultsTyped() {
             if(this.rawResults != null && !this.rawResults.isEmpty()) {
-                this.searchResults = new List<CoveoResult>();
+                this.results = new List<CoveoResult>();
                 Integer rank = 0;
                 for(Object resultUntyped: this.rawResults) {
                     CoveoResult result = new CoveoResult();
                     if(result.deserializeFromObject(resultUntyped)) {
                         result.rank = rank;
-                        this.searchResults.add(result);
+                        this.results.add(result);
                     }
                     rank++;
                 }
