@@ -37,42 +37,42 @@ public with sharing class CoveoAnalytics {
         }
     }
 
-    public class SearchEvent extends Event {
-        public static SearchEvent fromQueryResponse(CoveoSearchAPI.Response queryResponse) {
-            if(queryResponse != null) {
-                SearchEvent myEvent = new SearchEvent();
-                myEvent
-                    .withParam('numberOfResults', queryResponse.totalCount)
-                    .withParam('responseTime', queryResponse.duration)
-                    .withParam('searchQueryUid', queryResponse.searchUid);
-                return myEvent;
-            } else {
-                throw new AnalyticsException('Cannot create search event from a null query');
-            }
+    public class SearchEvent extends Event {}
+    
+    public static SearchEvent fromQueryResponse(CoveoSearchAPI.Response queryResponse) {
+        if(queryResponse != null) {
+            SearchEvent myEvent = new SearchEvent();
+            myEvent
+                .withParam('numberOfResults', queryResponse.totalCount)
+                .withParam('responseTime', queryResponse.duration)
+                .withParam('searchQueryUid', queryResponse.searchUid);
+            return myEvent;
+        } else {
+            throw new AnalyticsException('Cannot create search event from a null query');
         }
     }
 
-    public class ClickEvent extends Event {
-        public static ClickEvent fromSearchAPIResult(CoveoResult result) {
-            if(result != null) {
-                ClickEvent myEvent = new ClickEvent();
-                if(String.isNotEmpty((String)result.getRawProperty('permanentid'))) {
-                    myEvent.withCustomData('contentIDKey', 'permanentid')
-                        .withCustomData('contentIDValue', result.getRawProperty('permanentid'));
-                }
-                myEvent.withCustomData('documentTitle', result.title)
-                    .withCustomData('documentURL', result.clickUri)
-                    .withParam('documentPosition', result.rank+1) // clickRank is 1 based.
-                    .withParam('documentTitle', result.title)
-                    .withParam('documentUri', result.clickUri)
-                    .withParam('documentUrl', result.clickUri)
-                    .withParam('documentUriHash', result.getRawProperty('urihash'))
-                    .withParam('sourceName', result.getRawProperty('source'))
-                    .withParam('rankingModifier', result.rankingModifier);
-                return myEvent;
-            } else {
-                throw new AnalyticsException('Cannot create click event from a null query');
+    public class ClickEvent extends Event {}
+    
+    public static ClickEvent fromSearchAPIResult(CoveoResult result) {
+        if(result != null) {
+            ClickEvent myEvent = new ClickEvent();
+            if(String.isNotEmpty((String)result.getRawProperty('permanentid'))) {
+                myEvent.withCustomData('contentIDKey', 'permanentid')
+                    .withCustomData('contentIDValue', result.getRawProperty('permanentid'));
             }
+            myEvent.withCustomData('documentTitle', result.title)
+                .withCustomData('documentURL', result.clickUri)
+                .withParam('documentPosition', result.rank+1) // clickRank is 1 based.
+                .withParam('documentTitle', result.title)
+                .withParam('documentUri', result.clickUri)
+                .withParam('documentUrl', result.clickUri)
+                .withParam('documentUriHash', result.getRawProperty('urihash'))
+                .withParam('sourceName', result.getRawProperty('source'))
+                .withParam('rankingModifier', result.rankingModifier);
+            return myEvent;
+        } else {
+            throw new AnalyticsException('Cannot create click event from a null query');
         }
     }
 

@@ -55,7 +55,7 @@ public with sharing class CoveoSearchAPI {
             this.context = new Map<String,Object>();
         }
 
-        public build() {
+        public void build() {
             if(this.params == null) this.params = new Map<String,Object>();
             if(this.q != null) this.params.put('q', this.q);
             if(this.aq != null) this.params.put('aq', this.aq);

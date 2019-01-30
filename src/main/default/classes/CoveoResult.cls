@@ -21,6 +21,7 @@ public with sharing class CoveoResult {
         this.clickUri = (String)this.untypedResult.get('clickUri');
         this.isRecommendation = (Boolean)this.untypedResult.get('isRecommendation');
         this.isTopResult = (Boolean)this.untypedResult.get('isTopResult');
+        this.rankingModifier = (String)this.untypedResult.get('rankingModifier');
         this.raw = (Map<String,Object>)this.untypedResult.get('raw');
     }
 
@@ -54,13 +55,14 @@ public with sharing class CoveoResult {
 
     public Boolean getRawPropertyAsBoolean(String key) {
         if(this.raw == null || this.raw.get(key) == null) {
-            return null;
+            return false;
         }
         Object v = this.raw.get(key);
         // Try to parse as Boolean.
         if(v instanceof Boolean) return (Boolean)v;
         // Try to parse from a String.
         if(v instanceof String) return Boolean.valueOf((String)v);
+        return false;
     }
 
     public Integer getRawPropertyAsInteger(String key) {
@@ -72,6 +74,7 @@ public with sharing class CoveoResult {
         if(v instanceof Integer) return (Integer)v;
         // Try to parse from a String.
         if(v instanceof String) return Integer.valueOf((String)v);
+        return 0;
     }
 
     public Double getRawPropertyAsDouble(String key) {
@@ -83,6 +86,7 @@ public with sharing class CoveoResult {
         if(v instanceof Double) return (Double)v;
         // Try to parse from a String.
         if(v instanceof String) return Double.valueOf((String)v);
+        return 0.0;
     }
 
     public Boolean deserializeFromObject(Object toDeserialize) {

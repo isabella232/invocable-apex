@@ -1,7 +1,16 @@
 {
     "orgName": "Demo Company",
     "edition": "Developer",
-    "orgPreferences" : {
-        "enabled": ["S1DesktopEnabled"]
+    "features" : ["API", "Chatbot", "Communities", "DebugApex", "LightningServiceConsole", "LiveAgent", "ServiceCloud"],
+    "settings": {
+        "orgPreferenceSettings": {
+            "networksEnabled": true
+        },
+        "omniChannelSettings": {
+            "enableOmniChannel": true
+        },
+        "liveAgentSettings": {
+            "enableLiveAgent": true
+        }
     }
 }
