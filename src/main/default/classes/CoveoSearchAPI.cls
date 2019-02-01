@@ -1,9 +1,4 @@
 public with sharing class CoveoSearchAPI {
-    private static final String PATH = '';
-
-    public static String getPath() {
-        return CoveoSearchAPI.PATH;
-    }
 
     public class Response {
         public Map<String, Object> untyped;

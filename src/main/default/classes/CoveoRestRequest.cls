@@ -2,14 +2,10 @@ public with sharing class CoveoRestRequest {
     
     private static final Integer REST_PLATFORM_TIMEOUT = 60000;
     public static final String CONTENT_TYPE_APPLICATION_JSON = 'application/json; charset="UTF-8"';
-    private static final String COVEO_PROD_SEARCH_ENDPOINT = 'https://platform.cloud.coveo.com/rest/search/v2';
-
-    private static final String COVEO_PROD_ANALYTICS_ENDPOINT = 'https://usageanalytics.coveo.com/rest/v15/analytics';
 
     /** ================== ANALYTICS REQUEST =============== **/
     /** ==================================================== **/
-    public static HttpResponse logAnalyticsEvent(String token, String path, map<String,Object> eventBody, String visitorId) {
-        String uri = COVEO_PROD_ANALYTICS_ENDPOINT + '/' + path;
+    public static HttpResponse logAnalyticsEvent(String token, String uri, map<String,Object> eventBody, String visitorId) {
         String urlParams = null;
         if(String.isNotBlank(visitorId)) {
             urlParams = 'visitor=' + visitorId;
@@ -19,16 +15,12 @@ public with sharing class CoveoRestRequest {
 
     /** ================== SEARCH REQUEST ================== **/
     /** ==================================================== **/
-    public static HttpResponse callSearchPost(String token, map<String, Object> queryBody) {
-        return callSearchPost(COVEO_PROD_SEARCH_ENDPOINT, token, querybody);
+    public static HttpResponse callSearchPost(String uri, String token, map<String, Object> queryBody) {
+        return callRestPost(uri, token, querybody, null);
     }
 
-    public static HttpResponse callSearchPost(String path, String token, map<String, Object> queryBody) {
-        return callRestPost(COVEO_PROD_SEARCH_ENDPOINT+'/'+path, token, querybody, null);
-    }
-
-    public static HttpResponse callSearchPost(String path, String token, map<String, Object> queryBody, String urlParams) {
-        return callRestPost(COVEO_PROD_SEARCH_ENDPOINT+'/'+path, token, querybody, urlParams);
+    public static HttpResponse callSearchPost(String uri, String token, map<String, Object> queryBody, String urlParams) {
+        return callRestPost(uri, token, querybody, urlParams);
     }
     
     public static HttpResponse callRestPost(String uri, String token, map<String, Object> requestBody, String urlParams) {
