@@ -1,10 +1,13 @@
 public with sharing class CoveoAnalytics {
 
+    private enum EventTypes {SEARCH, CLICK, CUSTOM}
     private static final String COVEO_ANALYTICS_SEARCH_PATH = 'search';
     private static final String COVEO_ANALYTICS_CLICK_PATH = 'click';
     private static final String COVEO_ANALYTICS_CUSTOM_PATH = 'custom';
+    private static final String COVEO_PROD_ANALYTICS_ENDPOINT = 'https://usageanalytics.coveo.com/rest/v15/analytics';
 
-    private enum EventTypes {SEARCH, CLICK, CUSTOM}
+    public String endpoint;
+    public String token;
 
     public class AnalyticsException extends Exception{}
 
@@ -38,7 +41,6 @@ public with sharing class CoveoAnalytics {
     }
 
     public class SearchEvent extends Event {}
-    
     public static SearchEvent fromQueryResponse(CoveoSearchAPI.Response queryResponse) {
         if(queryResponse != null) {
             SearchEvent myEvent = new SearchEvent();
@@ -92,20 +94,31 @@ public with sharing class CoveoAnalytics {
         public String visitId;
         public String visitorId;
     }
-    
-    public static CoveoAnalytics.Response logSearchEvent(String token, CoveoAnalytics.SearchEvent event, String visitorId) {
-        return logEvent(token, event, visitorId, COVEO_ANALYTICS_SEARCH_PATH);
-    }
-    public static CoveoAnalytics.Response logClickEvent(String token, CoveoAnalytics.ClickEvent event, String visitorId) {
-        return logEvent(token, event, visitorId, COVEO_ANALYTICS_CLICK_PATH);
-    }
-    public static CoveoAnalytics.Response logCustomEvent(String token, CoveoAnalytics.CustomEvent event, String visitorId) {
-        return logEvent(token, event, visitorId, COVEO_ANALYTICS_CUSTOM_PATH);
+
+    public CoveoAnalytics() {
+        this.endpoint = COVEO_PROD_ANALYTICS_ENDPOINT;
+        this.token = '';
     }
 
-    private static CoveoAnalytics.Response logEvent(String token, CoveoAnalytics.Event event, String visitorId, String path) {
+    public CoveoAnalytics(String endpoint, String token) {
+        this.endpoint = endpoint;
+        this.token = token;
+    }
+    
+    public CoveoAnalytics.Response logSearchEvent(CoveoAnalytics.SearchEvent event, String visitorId) {
+        return logEvent(event, visitorId, COVEO_ANALYTICS_SEARCH_PATH);
+    }
+    public CoveoAnalytics.Response logClickEvent(CoveoAnalytics.ClickEvent event, String visitorId) {
+        return logEvent(event, visitorId, COVEO_ANALYTICS_CLICK_PATH);
+    }
+    public CoveoAnalytics.Response logCustomEvent(CoveoAnalytics.CustomEvent event, String visitorId) {
+        return logEvent(event, visitorId, COVEO_ANALYTICS_CUSTOM_PATH);
+    }
+
+    private CoveoAnalytics.Response logEvent(CoveoAnalytics.Event event, String visitorId, String path) {
         try {
-            HttpResponse analyticsResponse = CoveoRestRequest.logAnalyticsEvent(token, path, event.params, visitorId);
+            String analyticsUri = this.endpoint + '/' + path;
+            HttpResponse analyticsResponse = CoveoRestRequest.logAnalyticsEvent(this.token, analyticsUri, event.params, visitorId);
             if(analyticsResponse != null && analyticsResponse.getStatusCode() == 200) { // Everything worked correctly.
                 CoveoAnalytics.Response response = (CoveoAnalytics.Response) JSON.deserialize(analyticsResponse.getBody(), CoveoAnalytics.Response.class);
                 return response;
