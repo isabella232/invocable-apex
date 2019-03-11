@@ -1,0 +1,5 @@
+tests/test.cls
+.sfdx
+.vscode
+env/*
+node_modules

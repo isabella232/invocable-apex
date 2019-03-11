@@ -1,0 +1,15 @@
+{
+  "name": "coveo-invocable-apex",
+  "version": "1.0.0",
+  "description": "Code samples to call Coveo APIs via Apex.",
+  "repository": "https://erocheleau@bitbucket.org/erocheleau/coveo-invocable-apex.git",
+  "author": "Etienne Rocheleau <erocheleau@coveo.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-cli": "^2.0.1",
+    "sfdx-js": "^4.5.0",
+    "sfdx-prebuilt": "^5.9.4",
+    "yargs": "^13.2.1"
+  }
+}
