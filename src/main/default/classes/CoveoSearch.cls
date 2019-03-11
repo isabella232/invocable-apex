@@ -35,7 +35,8 @@ public with sharing class CoveoSearch {
                     return null;
                 }
             } catch (Exception e) {
-                System.debug(e.getMessage());
+                System.debug(e);
+                System.debug(e.getLineNumber());
                 return null;
             }
         }
@@ -55,7 +56,8 @@ public with sharing class CoveoSearch {
                     return null;
                 }
             } catch (Exception e) {
-                System.debug(e.getMessage());
+                System.debug(e);
+                System.debug(e.getLineNumber());
                 return null;
             }
         }
