@@ -1,6 +1,6 @@
 # Packaged Apex classes to use Coveo APIs
 
-These were created to faciliate the use of Coveo APIs (SearchAPI and UsageAnalytics) from Apex.
+These were created to facilitate the use of Coveo APIs (SearchAPI and UsageAnalytics) from Apex.
 There are two main classes:
 
 ## CoveoSearch
