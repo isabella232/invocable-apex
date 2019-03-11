@@ -1,6 +1,28 @@
 # Packaged Apex classes to use Coveo APIs
 
 These were created to facilitate the use of Coveo APIs (SearchAPI and UsageAnalytics) from Apex.
+
+## To install 
+
+[Install this package in a production environment](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t6A000003OkSUQA0)
+
+[Install this package in a sandbox environment](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t6A000003OkSUQA0)
+
+## Using this project in an Einstein chatbot
+
+In the `src/main/default/classes/` folder of this project there are two examples classes.
+
+- CoveoInvocableQuerySuggest
+- CoveoInvocableSearch
+
+These two classes are examples of how to use this repository in the context of Salesforce invocable Apex.
+For example, these would allow you to invoke the Coveo Query Suggest API and the Coveo Search API.
+In the Coveo Search API example, there is also a section on sending analytics.
+
+**Remember that to use these classes within an Einstein bot, you need to authorize them in the permission set**
+
+# How to use as a library
+
 There are two main classes:
 
 ## CoveoSearch
@@ -109,17 +131,3 @@ https://platform.cloud.coveo.com/docs?api=SearchApi#/
 The minimal required privileges for this (API key)[https://docs.coveo.com/en/1718/cloud-v2-administrators/manage-api-keys#add-an-api-key] are : 
 
     - Search > Execute query: `Allowed`
-
-
-## Using this project in an Einstein chatbot.
-
-In the `src/main/default/classes/` folder of this project there are two examples classes.
-
-- CoveoInvocableQuerySuggest
-- CoveoInvocableSearch
-
-These two classes are examples of how to use this repository in the context of Salesforce invocable Apex.
-For example, these would allow you to invoke the Coveo Query Suggest API and the Coveo Search API.
-In the Coveo Search API example, there is also a section on sending analytics.
-
-**Remember that to use these classes within an Einstein bot, you need to authorize them in the permission set**

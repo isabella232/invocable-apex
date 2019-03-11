@@ -1,11 +1,22 @@
 {
-  "packageDirectories": [
-    {
-      "path": "src",
-      "default": true
+    "packageDirectories": [
+        {
+            "path": "src",
+            "default": true
+        },
+        {
+            "path": "src/",
+            "package": "coveo-invocable-apex",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "default": false
+        }
+    ],
+    "namespace": "",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "44.0",
+    "packageAliases": {
+        "coveo-invocable-apex": "0Ho6A000000KynNSAS",
+        "coveo-invocable-apex@0.1.0-1": "04t6A000003OkSUQA0"
     }
-  ],
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "44.0"
 }
