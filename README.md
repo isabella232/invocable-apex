@@ -8,7 +8,12 @@ The documentation for the class necessary to [send a query](https://docs.coveo.c
 
 The documentation on how to use these classes to send usage analytics events can be found [here](https://docs.coveo.com/en/3118).
 
-You would now use these classes in your own InvocableApex actions to interact with an Einstein bot for example.
+## Using Coveo within an Einstein bot
+
+If you are looking how to use Coveo inside an Einstein bot, please visit: https://github.com/coveooss/lwc-coveobot
+
+
+# =================== DEPRECATED =======================
 
 # Packaged Apex classes to use Coveo APIs
 
