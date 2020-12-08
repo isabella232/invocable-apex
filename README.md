@@ -13,7 +13,7 @@ The documentation on how to use these classes to send usage analytics events can
 If you are looking how to use Coveo inside an Einstein bot, please visit: https://github.com/coveooss/lwc-coveobot
 
 
-# =================== DEPRECATED =======================
+# === DEPRECATED ===
 
 # Packaged Apex classes to use Coveo APIs
 
