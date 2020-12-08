@@ -1,3 +1,20 @@
+# Deprecation notice
+
+This package still works but will receive no further updates. It was deprecated in favor of using the following classes that are now part of the [Coveo for Salesforce AppExchange package](https://url.coveo.com/appexchangelisting).
+
+## Documentation
+
+The documentation for the class necessary to [send a query](https://docs.coveo.com/en/2988#executequery) or to [get query suggestions](https://docs.coveo.com/en/2988#querysuggest) can be found [here](https://docs.coveo.com/en/2988).
+
+The documentation on how to use these classes to send usage analytics events can be found [here](https://docs.coveo.com/en/3118).
+
+## Using Coveo within an Einstein bot
+
+If you are looking how to use Coveo inside an Einstein bot, please visit: https://github.com/coveooss/lwc-coveobot
+
+
+# === DEPRECATED ===
+
 # Packaged Apex classes to use Coveo APIs
 
 These were created to facilitate the use of Coveo APIs (SearchAPI and UsageAnalytics) from Apex.
